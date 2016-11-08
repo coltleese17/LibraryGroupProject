@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -6,9 +7,9 @@ public class Book {
 	private String title;
 	private String author;
 	private String status; // ("On Shelf", or "Checked out");
-	private LocalDateTime dueDate; //month-day-year
+	private LocalDate dueDate; //month-day-year
 	
-	public Book(String title, String author, String status, LocalDateTime date) {
+	public Book(String title, String author, String status, LocalDate date) {
 		this.title = title;
 		this.author = author;
 		this.status = status;
@@ -39,11 +40,11 @@ public class Book {
 		this.status = status;
 	}
 
-	public LocalDateTime getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(LocalDateTime dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	} 
 	
