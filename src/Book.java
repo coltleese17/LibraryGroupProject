@@ -7,13 +7,13 @@ public class Book {
 	private String title;
 	private String author;
 	private String status; // ("On Shelf", or "Checked out");
-	private LocalDate dueDate; //month-day-year
+	private LocalDate dueDate; //year/month/day
 	
-	public Book(String title, String author, String status, LocalDate date) {
+	public Book(String title, String author, String status, LocalDate dueDate) {
 		this.title = title;
 		this.author = author;
 		this.status = status;
-		this.dueDate = date;
+		this.dueDate = dueDate;
 	}
 
 	public String getTitle() {
