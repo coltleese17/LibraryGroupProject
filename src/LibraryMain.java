@@ -105,13 +105,36 @@ public class LibraryMain {
 	
 	
 
-	// public static String searchAuthor(String input) {
-	// //returns all books with inputted Author
-	// }
+	//Search all Author returns all books with inputed Author
+    public static void SearchAuthor(String FindAuthor) {
+        
+        
+        System.out.println("Searching for Author in the library catalog \n");
+        for (Book s : books){
+        
+            if(s.getAuthor().toLowerCase().contains(FindAuthor.toLowerCase()))
+        System.out.print("    "+s.getAuthor() );
+        System.out.print("   "+s.getTitle());     
+        System.out.println("   "+s.getStatus());
+        }
+        }
+    
+    
+    
+         //returns all title and return books with inputed title
+    public static void SearchTitle(String FindTitle) {
+        
+        System.out.println("Searching for Title in the library catalog \n");
+        for (Book s : books){
+        
+        if(s.getTitle().toLowerCase().contains(FindTitle.toLowerCase())){
+        System.out.print("   "+s.getTitle());     
+        System.out.print("    "+s.getAuthor() );
+        System.out.println("   "+s.getStatus());
+        }
+        }
+}
 
-	// public static String searchTitle(String input) {
-	// returns all books with inputted title
-	// }
 
 	public static void checkoutBook(String titleInput) {
 		// changes status of book to Checked Out
@@ -125,12 +148,7 @@ public class LibraryMain {
 		// changes status of book to On shelf
 	}
 
-	// public static Book addBook(String title, String author) {
-	// adds to list of books.
-	// sets default status as On shelf
-	// sets
-	// books.add(title, author, "On shelf", LocalDateTime.now());
-	// }
+	
 
 	// stores objects from listofbooks.txt into an arrayList
 	public static ArrayList<Book> getObjectsFromFile() {
