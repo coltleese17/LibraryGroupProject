@@ -11,68 +11,113 @@ import java.util.Scanner;
 
 
 public class LibraryMain {
-	
+
 	static ArrayList<Book> books = new ArrayList<Book>();
-	
 
 	public static void main(String[] args) {
 		
+		String choice = "y";
+		Scanner scan = new Scanner(System.in); 
+		System.out.println("Welcome to The Detroit Grand Circus Library\n");
+		displayMenuOptions();
+		books = getObjectsFromFile();
 		
-		Scanner scan = new Scanner(System.in);
+	while(choice.equalsIgnoreCase("y")) {
 		
-		System.out.println("Welcome to the library");
+		System.out.println();
+		//user input for menu
+		//if input == 1 then, run displayBooks() 2 then search by author etc, 
+		//run corresponding method.
+		System.out.println("Enter your number here, press 0 for menu: ");
+		int getInt = scan.nextInt();
 		
+		//get input.
+		//if input == 1 then, run displayBooks() etc;
+		switch (getInt) {
+			case 0:
+				displayMenuOptions();
+				break;
+			case 1: 
+				System.out.println("im being accessed");
+				displayAllBooks();
+				
+				break; 
+				
+			case 2:
+				//searchAuthor();
+				break; 
+				
+			case 3:
+				//searchTitle();
+				break; 
+				
+			case 4:
+				//checkoutBook();
+				break; 
+				
+			case 5:
+				//displayCheckedOut(); 
+				break; 
+				
+			case 6:
+				//returnBook(); 
+				break; 
+				
+			case 7: 
+				//addBook(); 
+				break; 
+				
+			default: 
+				System.out.println("Please re-enter another number: ");
+				break; 
+	}
 		
-		//Sample Books
-		/*books.add(new Book("title1", "author1", "status1", LocalDateTime.now()));
+	}
+	//Sample Book Inventory Display 
+	/*  books.add(new Book("title1", "author1", "status1", LocalDateTime.now()));
 		books.add(new Book("title2", "author2", "status2", LocalDateTime.now()));
 		books.add(new Book("title3", "author3", "status3", LocalDateTime.now()));
 		books.add(new Book("title4", "author4", "status4", LocalDateTime.now()));
 		books.add(new Book("title5", "author5", "status5", LocalDateTime.now()));
 		books.add(new Book("title6", "author6", "status6", LocalDateTime.now()));
-		books.add(new Book("title8", "author8", "status8", LocalDateTime.now()));
+		books.add(new Book("title8", "author7", "status7", LocalDateTime.now()));		
+		books.add(new Book("title9", "author8", "status8", LocalDateTime.now()));
 		books.add(new Book("title9", "author9", "status9", LocalDateTime.now()));
-		books.add(new Book("title10", "author10", "status10", LocalDateTime.now()));
+		books.add(new Book("title9", "author10", "status10", LocalDateTime.now()));
+		books.add(new Book("title9", "author11", "status11", LocalDateTime.now()));
+		books.add(new Book("title10", "author12", "status12", LocalDateTime.now()));
 		*/
-		books = getObjectsFromFile();
-		displayAllBooks();
-		
-		
-		//System.out.println(books.get().getAuthor());
-		
-		//1. Populate an arraylist of books with files from a text file.
-		
-		/*
-		System.out.println("Press 1 to Display all books.");
-		System.out.println("Press 2 to search by author ");
-		System.out.println("Press 3 to serach by title");
-		System.out.println("Press 4 to check out a book");
-		System.out.println("Press 5 to return a book");
-		System.out.println("Press 6 add a book");
-		*/
-		//get input.
-		//if input == 1 then, run displayBooks();
-		//run corresponding method.
-		
+		//books = getObjectsFromFile();
 		//displayAllBooks();
-		//searchAuthor("Tolstoy");
-
+		
 	}
-	
+			
+	public static void displayMenuOptions() {
+			
+		System.out.println("===========LIBRARY MENU=============");	
+		System.out.println("Please press 1 to display all books. ");
+		System.out.println("Please press 2 to search by author. ");
+		System.out.println("Please press 3 to search by title. ");
+		System.out.println("Please press 4 to check out a book. ");
+		System.out.println("Please press 5 to return a book. ");
+		System.out.println("Please press 6 to add a book. ");
+		System.out.println("====================================");
+			}
+
+		//prints list of all books in library
 		public static void displayAllBooks() {
-			//prints list of all books
 			for (Book b: books) {
 				System.out.println(b.getTitle() + ", " + b.getAuthor() + ", " + b.getStatus() + "," + b.getDueDate());
 			}
 		}
 		
-		//public static String searchAuthor(String input) {
-		//		//returns all books with inputted Author
-		//}
+/*		public static String searchAuthor(String input) {
+		//returns all books with inputed Author 
+		}
 		
-		//public static String searchTitle(String input) {
-			 //returns all books with inputted title
-		//}
+		public static String searchTitle(String input) {
+			 //returns all books with inputed title
+		}
 		
 		public static void checkoutBook(String titleInput) {
 			//changes status of book to Checked Out
@@ -86,12 +131,12 @@ public class LibraryMain {
 			//changes status of book to On shelf
 		}
 		
-		//public static Book addBook(String title, String author) {
+		public static Book addBook(String title, String author) {
 			//adds to list of books.
 			//sets default status as On shelf
 			//sets 
 			//books.add(title, author, "On shelf", LocalDateTime.now());
-		//}
+		}   */
 		
 		//stores objects from listofbooks.txt into an arrayList
 		public static ArrayList<Book> getObjectsFromFile() {
