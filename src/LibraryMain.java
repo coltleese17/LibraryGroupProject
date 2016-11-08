@@ -17,115 +17,73 @@ public class LibraryMain {
 
 	static ArrayList<Book> books = new ArrayList<Book>();
 
-
 	public static void main(String[] args) throws IOException {
-		
+
 		String choice = "y";
-		Scanner scan = new Scanner(System.in); 
+		Scanner scan = new Scanner(System.in);
 		System.out.println("Welcome to The Detroit Grand Circus Library\n");
 		displayMenuOptions();
 		books = getObjectsFromFile();
-		
-	while(choice.equalsIgnoreCase("y")) {
-		
-		System.out.println();
-		//user input for menu
-		//if input == 1 then, run displayBooks() 2 then search by author etc, 
-		//run corresponding method.
-		System.out.println("Enter your number here, press 0 for menu: ");
-		int getInt = scan.nextInt();
-		
-		//get input.
-		//if input == 1 then, run displayBooks() etc;
-		switch (getInt) {
+
+		while (choice.equalsIgnoreCase("y")) {
+
+			System.out.println();
+			// user input for menu
+			// if input == 1 then, run displayBooks() 2 then search by author
+			// etc,
+			// run corresponding method.
+			System.out.println("Enter your number here, press 0 for menu: ");
+			int getInt = scan.nextInt();
+
+			// get input.
+			// if input == 1 then, run displayBooks() etc;
+			switch (getInt) {
 			case 0:
 				displayMenuOptions();
 				break;
-			case 1: 
+			case 1:
 				System.out.println("im being accessed");
 				displayAllBooks();
-				
-				break; 
-				
+
+				break;
+
 			case 2:
-				//searchAuthor();
-				break; 
-				
+				// searchAuthor();
+				break;
+
 			case 3:
-				//searchTitle();
-				break; 
-				
+				// searchTitle();
+				break;
+
 			case 4:
-				//checkoutBook();
-				break; 
-				
+				// checkoutBook();
+				break;
+
 			case 5:
-				//displayCheckedOut(); 
-				break; 
-				
+				// displayCheckedOut();
+				break;
+
 			case 6:
-				//returnBook(); 
-				break; 
-				
-			case 7: 
-				//addBook(); 
-				break; 
-				
-			default: 
+				// returnBook();
+				break;
+
+			case 7:
+				// addBook();
+				break;
+
+			default:
 				System.out.println("Please re-enter another number: ");
-				break; 
-	}
-		
-	}
-	//Sample Book Inventory Display 
-	/*  books.add(new Book("title1", "author1", "status1", LocalDateTime.now()));
-		books.add(new Book("title2", "author2", "status2", LocalDateTime.now()));
-		books.add(new Book("title3", "author3", "status3", LocalDateTime.now()));
-		books.add(new Book("title4", "author4", "status4", LocalDateTime.now()));
-		books.add(new Book("title5", "author5", "status5", LocalDateTime.now()));
-		books.add(new Book("title6", "author6", "status6", LocalDateTime.now()));
-		books.add(new Book("title8", "author7", "status7", LocalDateTime.now()));		
-		books.add(new Book("title9", "author8", "status8", LocalDateTime.now()));
-		books.add(new Book("title9", "author9", "status9", LocalDateTime.now()));
-		books.add(new Book("title9", "author10", "status10", LocalDateTime.now()));
-		books.add(new Book("title9", "author11", "status11", LocalDateTime.now()));
-		books.add(new Book("title10", "author12", "status12", LocalDateTime.now()));
-		*/
-		//books = getObjectsFromFile();
-		//displayAllBooks();
-		
-		books = getObjectsFromFile();
-		displayAllBooks();
-		System.out.println("=================");
-		books.add(new Book("title12", "author11", "status11", null));
-		displayAllBooks();
+				break;
+			}
+
+		}
 		saveFile(books);
-
-		// System.out.println(books.get().getAuthor());
-
-		// 1. Populate an arraylist of books with files from a text file.
-
-		/*
-		 * System.out.println("Press 1 to Display all books.");
-		 * System.out.println("Press 2 to search by author ");
-		 * System.out.println("Press 3 to serach by title");
-		 * System.out.println("Press 4 to check out a book");
-		 * System.out.println("Press 5 to return a book");
-		 * System.out.println("Press 6 add a book");
-		 */
-		// get input.
-		// if input == 1 then, run displayBooks();
-		// run corresponding method.
-
-		// displayAllBooks();
-		// searchAuthor("Tolstoy");
-
 	}
 
-			
+	
 	public static void displayMenuOptions() {
-			
-		System.out.println("===========LIBRARY MENU=============");	
+
+		System.out.println("===========LIBRARY MENU=============");
 		System.out.println("Please press 1 to display all books. ");
 		System.out.println("Please press 2 to search by author. ");
 		System.out.println("Please press 3 to search by title. ");
@@ -133,16 +91,19 @@ public class LibraryMain {
 		System.out.println("Please press 5 to return a book. ");
 		System.out.println("Please press 6 to add a book. ");
 		System.out.println("====================================");
-			}
+	}
+	
+	
 
-		//prints list of all books in library
-		public static void displayAllBooks() {
-			for (Book b: books) {
-				System.out.println(b.getTitle() + ", " + b.getAuthor() + ", " + b.getStatus() + "," + b.getDueDate());
-			}
+	// prints list of all books in library
+	public static void displayAllBooks() {
+		for (Book b : books) {
+			System.out.println(b.getTitle() + ", " + b.getAuthor() + ", "
+					+ b.getStatus() + "," + b.getDueDate());
 		}
-
-
+	}
+	
+	
 
 	// public static String searchAuthor(String input) {
 	// //returns all books with inputted Author
@@ -196,10 +157,12 @@ public class LibraryMain {
 				String[] objectsToGet = line.split("/");
 				String stringDate = objectsToGet[3].toString();
 				if (stringDate.equalsIgnoreCase("empty")) {
-					books.add(new Book(objectsToGet[0], objectsToGet[1], objectsToGet[2], null));
+					books.add(new Book(objectsToGet[0], objectsToGet[1],
+							objectsToGet[2], null));
 				} else {
 					formattedDate = LocalDate.parse(stringDate, dateFormat);
-					books.add(new Book(objectsToGet[0], objectsToGet[1], objectsToGet[2], formattedDate));
+					books.add(new Book(objectsToGet[0], objectsToGet[1],
+							objectsToGet[2], formattedDate));
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -211,29 +174,28 @@ public class LibraryMain {
 
 		return books;
 	}
-	
-	//public static Book addBook(String title, String author) {
-		//adds to list of books.
-		//sets default status as On shelf
-		//sets 
-		//books.add(title, author, "On shelf", LocalDateTime.now());
-	//}   
+
+	// public static Book addBook(String title, String author) {
+	// adds to list of books.
+	// sets default status as On shelf
+	// sets
+	// books.add(title, author, "On shelf", LocalDateTime.now());
+	// }
 
 	public static void saveFile(ArrayList<Book> books) throws IOException {
-		
+
 		DateTimeFormatter dateFormat = DateTimeFormatter
 				.ofPattern("uuuu-MM-dd"); // sets the format
-		
+
 		LocalDate formattedDate;
-		
+
 		// take everything in our arraylist and save it to the ListOfBooks.txt
 		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(
 				new File(System.getProperty("user.dir")
 						+ "/src/ListOfBooks.txt"))));
 
 		for (Book b : books) {
-			
-					
+
 			if (b.getDueDate() == null) {
 				out.println(b.getTitle() + "/" + b.getAuthor() + "/"
 						+ b.getStatus() + "/empty");
