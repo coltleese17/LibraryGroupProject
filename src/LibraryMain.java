@@ -113,7 +113,7 @@ public class LibraryMain {
 		System.out.println("Please press 4 to check out a book. ");
 		System.out.println("Please press 5 to return a book. ");
 		System.out.println("Please press 6 to add a book. ");
-		System.out.println("Press to 7 to exit library");
+		System.out.println("Please press 7 to exit library.");
 		System.out.println("====================================");
 	}
 	
@@ -122,6 +122,7 @@ public class LibraryMain {
 	// prints list of all books in library
 	public static void displayAllBooks() {
 		System.out.println("Our Library of Books Include: ");
+		System.out.println("-----------------------------");
 		for (Book b : books) {
 			if (b.getDueDate() == null) {
 				System.out.println(b.getTitle() + ", " + b.getAuthor() + ", "
