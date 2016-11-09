@@ -1,4 +1,4 @@
-War and Peace/Leo Tolstoy/Checked Out/empty
+War and Peace/Leo Tolstoy/checked out/2016-11-23
 Anna Karenina/Leo Tolstoy/Checked Out/empty
-The Stranger/Albert Camus/On Shelf/1992-02-22
-Harry Potter/J.K. Rowling/On Shelf/1993-03-22
+The Stranger/Albert Camus/checked out/2016-11-23
+Harry Potter/J.K. Rowling/checked out/2016-11-23

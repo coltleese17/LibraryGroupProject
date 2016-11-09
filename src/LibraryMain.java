@@ -20,6 +20,7 @@ public class LibraryMain {
 	public static void main(String[] args) throws IOException {
 
 		String choice = "y";
+		String userInput;
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Welcome to The Detroit Grand Circus Library\n");
 		displayMenuOptions();
@@ -33,7 +34,7 @@ public class LibraryMain {
 			// etc,
 			// run corresponding method.
 			
-			int getInt = Validator.getInt(scan, "Enter your number here, press 0 for menu: ", 0, 6);
+			int getInt = Validator.getInt(scan, "Enter your number here, press 0 for menu: ", 0, 7);
 			
 			// get input.
 			// if input == 1 then, run displayBooks() etc;
@@ -48,11 +49,11 @@ public class LibraryMain {
 				break;
 
 			case 2:
-				String authorInput;
+				
 				scan.nextLine();
-				System.out.println("Type the name of the author you're sarching for: ");
-				authorInput = scan.nextLine();
-				searchAuthor(authorInput);
+				System.out.println("Type the name of the author you're searching for: ");
+				userInput = scan.nextLine();
+				searchAuthor(userInput);
 				break;
 
 			case 3:
@@ -60,8 +61,14 @@ public class LibraryMain {
 				break;
 
 			case 4:
-				 displayOnShelf();
-				// checkoutBook();
+				
+				System.out.println("Books on shelf:");
+				displayOnShelf();
+				System.out.println("Type the title of the book you want to check out: ");
+				userInput = scan.nextLine();
+				checkoutBook(userInput);
+				saveFile(books);
+				
 				break;
 
 			case 5:
@@ -74,7 +81,8 @@ public class LibraryMain {
 				break;
 
 			case 7:
-				// addBook();
+				choice="n";
+				System.out.println("bye!!");
 				break;
 
 			default:
@@ -96,6 +104,7 @@ public class LibraryMain {
 		System.out.println("Please press 4 to check out a book. ");
 		System.out.println("Please press 5 to return a book. ");
 		System.out.println("Please press 6 to add a book. ");
+		System.out.println("Press to 7 to exit library");
 		System.out.println("====================================");
 	}
 	
@@ -150,6 +159,16 @@ public class LibraryMain {
 
 	public static void checkoutBook(String titleInput) {
 		
+		for(Book b: books){
+			if(titleInput.equalsIgnoreCase(b.getTitle())
+					&& b.getStatus().equalsIgnoreCase("On shelf")){
+				b.setStatus("checked out");
+				b.setDueDate(LocalDate.now().plusWeeks(2));
+				System.out.println("you checked out "+ b.getTitle() + " it's due back:" +b.getDueDate());
+			}
+					
+		}
+		
 	}
 
 	public static void displayCheckedOut() {
@@ -170,7 +189,7 @@ public class LibraryMain {
 		for (Book b : books) {
 			if (b.getStatus().equalsIgnoreCase("On Shelf")) {
 				System.out.println(
-						b.getTitle() + " " + b.getAuthor() + " " + b.getStatus() + " due back: " + b.getDueDate());
+						b.getTitle() + ", " + b.getAuthor() + ", " + b.getStatus() );
 			}
 		}
 		
