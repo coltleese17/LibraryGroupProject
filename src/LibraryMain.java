@@ -80,12 +80,12 @@ public class LibraryMain {
 				break;
 
 			case 6:				
-				displayCheckedOut();
+				//add book
 				break;
 
 			case 7:
 				choice="n";
-				System.out.println("bye!!");
+				System.out.println("Thanks Goodbye!");
 				break;
 
 			default:
@@ -193,15 +193,20 @@ public class LibraryMain {
 
 
 	public static void checkoutBook(String titleInput) {
-		
+		Book checkedOutBook = null;
 		for(Book b: books){
 			if(titleInput.equalsIgnoreCase(b.getTitle())
 					&& b.getStatus().equalsIgnoreCase("On Shelf")){
-				b.setStatus("Checked out");
-				b.setDueDate(LocalDate.now().plusWeeks(2));
-				System.out.println("You checked out "+ b.getTitle() + ", it's due back:" +b.getDueDate());
-			}
-					
+				checkedOutBook = b;
+			}	
+		}
+		
+		if (checkedOutBook == null) {
+			System.out.println("Sorry that is not available.");
+		} else {
+			checkedOutBook.setStatus("Checked out");
+			checkedOutBook.setDueDate(LocalDate.now().plusWeeks(2));
+			System.out.println("You checked out "+ checkedOutBook.getTitle() + ", it's due back:" +checkedOutBook.getDueDate());
 		}
 		
 	}
@@ -210,9 +215,11 @@ public class LibraryMain {
 		
 		for (Book b : books){
 			if (b.getStatus().equalsIgnoreCase("Checked Out")){
-				System.out.println(b.getTitle() + " " + b.getAuthor() + " " + b.getStatus() + " due back: " + b.getDueDate()); 
+				System.out.println(b.getTitle() + ", " + b.getAuthor() + ", " + b.getStatus() + ", Due back: " + b.getDueDate()); 
 			}
+			
 		}
+		System.out.println();
 	}
 
 	public static void displayOnShelf() {
@@ -221,19 +228,27 @@ public class LibraryMain {
 			if (b.getStatus().equalsIgnoreCase("On Shelf")) {
 				System.out.println(
 						b.getTitle() + ", " + b.getAuthor() + ", " + b.getStatus() );
+				
 			}
 		}
+		System.out.println();
 	}
 
 	public static void returnBook(String titleInput) {
+		Book returnedBook = null;
 		for(Book b: books){
 			if(titleInput.equalsIgnoreCase(b.getTitle())
 					&& b.getStatus().equalsIgnoreCase("Checked Out")){
-				b.setStatus("On Shelf");
-				b.setDueDate(null);
-				System.out.println("You returned "+ b.getTitle());
-			}
-					
+				returnedBook = b;
+			}	
+		}
+		
+		if (returnedBook == null) {
+			System.out.println("Sorry that is not available to return");
+		} else {
+			returnedBook.setStatus("On Shelf");
+			returnedBook.setDueDate(null);
+			System.out.println("Thanks, you returned "+ returnedBook.getTitle());
 		}
 	}
 
