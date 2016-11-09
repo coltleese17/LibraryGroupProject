@@ -32,9 +32,9 @@ public class LibraryMain {
 			// if input == 1 then, run displayBooks() 2 then search by author
 			// etc,
 			// run corresponding method.
-			System.out.println("Enter your number here, press 0 for menu: ");
-			int getInt = scan.nextInt();
-
+			
+			int getInt = Validator.getInt(scan, "Enter your number here, press 0 for menu: ", 0, 6);
+			
 			// get input.
 			// if input == 1 then, run displayBooks() etc;
 			switch (getInt) {
@@ -48,11 +48,15 @@ public class LibraryMain {
 				break;
 
 			case 2:
-				// searchAuthor();
+				String authorInput;
+				scan.nextLine();
+				System.out.println("Type the name of the author you're sarching for: ");
+				authorInput = scan.nextLine();
+				searchAuthor(authorInput);
 				break;
 
 			case 3:
-				// searchTitle();
+				searchTitle("War");
 				break;
 
 			case 4:
@@ -72,7 +76,7 @@ public class LibraryMain {
 				break;
 
 			default:
-				System.out.println("Please re-enter another number: ");
+				System.out.println("Re-enter your number here, press 0 for menu: ");
 				break;
 			}
 
@@ -106,32 +110,38 @@ public class LibraryMain {
 	
 
 	//Search all Author returns all books with inputed Author
-    public static void SearchAuthor(String FindAuthor) {
+    public static void searchAuthor(String findAuthor) {
         
-        
-        System.out.println("Searching for Author in the library catalog \n");
+        findAuthor = findAuthor.toLowerCase();
+        System.out.println("Searching for " + findAuthor + " in the library catalog \n");
         for (Book s : books){
+        	
+            if (s.getAuthor().toLowerCase().contains(findAuthor)) {
+	        System.out.print("    "+s.getAuthor() );
+	        System.out.print("   "+s.getTitle());     
+	        System.out.println("   "+s.getStatus());
+            }
+        }
         
-            if(s.getAuthor().toLowerCase().contains(FindAuthor.toLowerCase()))
-        System.out.print("    "+s.getAuthor() );
-        System.out.print("   "+s.getTitle());     
-        System.out.println("   "+s.getStatus());
-        }
-        }
+    }
     
     
     
          //returns all title and return books with inputed title
-    public static void SearchTitle(String FindTitle) {
+    public static void searchTitle(String findTitle) {
         
+    	findTitle = findTitle.toLowerCase();
         System.out.println("Searching for Title in the library catalog \n");
         for (Book s : books){
-        
-        if(s.getTitle().toLowerCase().contains(FindTitle.toLowerCase())){
-        System.out.print("   "+s.getTitle());     
-        System.out.print("    "+s.getAuthor() );
-        System.out.println("   "+s.getStatus());
-        }
+        	s.setTitle(s.getTitle().toLowerCase());
+		        if(s.getTitle().contains(findTitle)){
+		        System.out.print("   "+s.getTitle());     
+		        System.out.print("    "+s.getAuthor() );
+		        System.out.println("   "+s.getStatus());
+	        }
+		        else{
+		        	System.out.println("Sorry, we dont have any books with that title.");
+		        }
         }
 }
 
