@@ -83,6 +83,7 @@ public class LibraryMain {
 				//add book
 				
 				addBooks();
+				saveFile(books);
 				break;
 
 			case 7:
