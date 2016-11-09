@@ -32,7 +32,7 @@ public class LibraryMain {
 			
 			
 			int getInt = Validator.getInt(scan, "Enter your number here, press 0 for menu, 7 for quit: ", 0, 7);
-			
+			System.out.println();
 			
 			switch (getInt) {
 			case 0:
@@ -53,7 +53,9 @@ public class LibraryMain {
 				break;
 
 			case 3:
-				searchTitle("War");
+				System.out.println("Type the name of the title you're searching for: ");
+				userInput = scan.nextLine();
+				searchTitle(userInput);
 				break;
 
 			case 4:
@@ -113,6 +115,7 @@ public class LibraryMain {
 
 	// prints list of all books in library
 	public static void displayAllBooks() {
+		System.out.println("Our Library of Books Include: ");
 		for (Book b : books) {
 			if (b.getDueDate() == null) {
 				System.out.println(b.getTitle() + ", " + b.getAuthor() + ", "
@@ -128,38 +131,64 @@ public class LibraryMain {
 
 	//Search all Author returns all books with inputed Author
     public static void searchAuthor(String findAuthor) {
+        ArrayList<Book> booksByAuthor = new ArrayList<Book>();
         
         findAuthor = findAuthor.toLowerCase();
-        System.out.println("Searching for " + findAuthor + " in the library catalog \n");
-        for (Book s : books){
+        
+        for (Book b : books){
         	
-            if (s.getAuthor().toLowerCase().contains(findAuthor)) {
-	        System.out.print("    "+s.getAuthor() );
-	        System.out.print("   "+s.getTitle());     
-	        System.out.println("   "+s.getStatus());
+            if (b.getAuthor().toLowerCase().contains(findAuthor)) {
+            	booksByAuthor.add(new Book(b.getTitle(), b.getAuthor(), b.getStatus(), b.getDueDate()));
             }
         }
         
+        if (booksByAuthor.isEmpty()) {
+        	System.out.println("Sorry, that is not available at this time.");
+        } else {
+        	for (Book b: booksByAuthor) {
+        		if (b.getDueDate() == null) {
+    				System.out.println(b.getTitle() + ", " + b.getAuthor() + ", "
+    						+ b.getStatus());
+    			} else {
+    			System.out.println(b.getTitle() + ", " + b.getAuthor() + ", "
+    					+ b.getStatus() + ", Due Back: " + b.getDueDate());
+    			}
+        	}
+        }
+        
+        booksByAuthor = null;
     }
     
     
     
          //returns all title and return books with inputed title
     public static void searchTitle(String findTitle) {
+    	ArrayList<Book> booksByTitle = new ArrayList<Book>();
         
-    	findTitle = findTitle.toLowerCase();
-        System.out.println("Searching for Title in the library catalog \n");
-        for (Book s : books){
-        	s.setTitle(s.getTitle().toLowerCase());
-		        if(s.getTitle().contains(findTitle)){
-		        System.out.print("   "+s.getTitle());     
-		        System.out.print("    "+s.getAuthor() );
-		        System.out.println("   "+s.getStatus());
-	        }
-		        else{
-		        	System.out.println("Sorry, we dont have any books with that title.");
-		        }
+        findTitle = findTitle.toLowerCase();
+        
+        for (Book b : books){
+        	
+            if (b.getTitle().toLowerCase().contains(findTitle)) {
+            	booksByTitle.add(new Book(b.getTitle(), b.getAuthor(), b.getStatus(), b.getDueDate()));
+            }
         }
+        
+        if (booksByTitle.isEmpty()) {
+        	System.out.println("Sorry, that book is not available at this time.");
+        } else {
+        	for (Book b: booksByTitle) {
+        		if (b.getDueDate() == null) {
+    				System.out.println(b.getTitle() + ", " + b.getAuthor() + ", "
+    						+ b.getStatus());
+    			} else {
+    			System.out.println(b.getTitle() + ", " + b.getAuthor() + ", "
+    					+ b.getStatus() + ", Due Back: " + b.getDueDate());
+    			}
+        	}
+        }
+        
+        booksByTitle = null;
 }
 
 
@@ -167,8 +196,8 @@ public class LibraryMain {
 		
 		for(Book b: books){
 			if(titleInput.equalsIgnoreCase(b.getTitle())
-					&& b.getStatus().equalsIgnoreCase("On shelf")){
-				b.setStatus("checked out");
+					&& b.getStatus().equalsIgnoreCase("On Shelf")){
+				b.setStatus("Checked out");
 				b.setDueDate(LocalDate.now().plusWeeks(2));
 				System.out.println("You checked out "+ b.getTitle() + ", it's due back:" +b.getDueDate());
 			}
