@@ -60,15 +60,17 @@ public class LibraryMain {
 				break;
 
 			case 4:
+				 displayOnShelf();
 				// checkoutBook();
 				break;
 
 			case 5:
-				// displayCheckedOut();
+				 displayCheckedOut();
+				 // returnBook();
 				break;
 
-			case 6:
-				// returnBook();
+			case 6:				
+				displayCheckedOut();
 				break;
 
 			case 7:
@@ -147,11 +149,34 @@ public class LibraryMain {
 
 
 	public static void checkoutBook(String titleInput) {
-		// changes status of book to Checked Out
+		
 	}
 
 	public static void displayCheckedOut() {
-		// prints out all checked out books
+		
+		for (Book b : books){
+			if (b.getStatus().equalsIgnoreCase("Checked Out")){
+				System.out.println(b.getTitle() + " " + b.getAuthor() + " " + b.getStatus() + " due back: " + b.getDueDate()); 
+			}
+		}
+		
+		//go through library inventory
+		//if status is CheckedOut, then display each books title, author, status, and dueDate.
+		//
+	}
+
+	public static void displayOnShelf() {
+
+		for (Book b : books) {
+			if (b.getStatus().equalsIgnoreCase("On Shelf")) {
+				System.out.println(
+						b.getTitle() + " " + b.getAuthor() + " " + b.getStatus() + " due back: " + b.getDueDate());
+			}
+		}
+		
+		//go through library inventory
+		//if status is CheckedOut, then display each books title, author, status, and dueDate.
+		//
 	}
 
 	public static void returnBook(String titleInput) {

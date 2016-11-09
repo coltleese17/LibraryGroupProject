@@ -1,4 +1,4 @@
-War and Peace/Leo Tolstoy/Status1/empty
-Anna Karenina/Leo Tolstoy/Status2/empty
-The Stranger/Albert Camus/Status1/1992-02-22
-Harry Potter/J.K. Rowling/Status1/1993-03-22
+War and Peace/Leo Tolstoy/Checked Out/empty
+Anna Karenina/Leo Tolstoy/Checked Out/empty
+The Stranger/Albert Camus/On Shelf/1992-02-22
+Harry Potter/J.K. Rowling/On Shelf/1993-03-22
