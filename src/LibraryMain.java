@@ -81,6 +81,8 @@ public class LibraryMain {
 
 			case 6:				
 				//add book
+				
+				addBooks();
 				break;
 
 			case 7:
@@ -98,6 +100,9 @@ public class LibraryMain {
 	}
 
 	
+	
+
+
 	public static void displayMenuOptions() {
 
 		System.out.println("===========LIBRARY MENU=============");
@@ -251,7 +256,21 @@ public class LibraryMain {
 			System.out.println("Thanks, you returned "+ returnedBook.getTitle());
 		}
 	}
-
+	// addding the books
+	public static void addBooks() {
+		Scanner s=new Scanner(System.in);
+		String newAuthor;
+		String newTitle;
+		
+		System.out.println("Enter the Title:");
+		newTitle=s.nextLine();
+		System.out.println("Enter the Author:");
+		newAuthor=s.nextLine();
+		books.add(new Book(newTitle,newAuthor,"On shelf",null));
+		System.out.println("Thank you for adding to our library.");
+		
+		
+	}
 	
 
 	// stores objects from listofbooks.txt into an arrayList
