@@ -29,28 +29,24 @@ public class LibraryMain {
 		while (choice.equalsIgnoreCase("y")) {
 
 			System.out.println();
-			// user input for menu
-			// if input == 1 then, run displayBooks() 2 then search by author
-			// etc,
-			// run corresponding method.
 			
-			int getInt = Validator.getInt(scan, "Enter your number here, press 0 for menu: ", 0, 7);
 			
-			// get input.
-			// if input == 1 then, run displayBooks() etc;
+			int getInt = Validator.getInt(scan, "Enter your number here, press 0 for menu, 7 for quit: ", 0, 7);
+			
+			
 			switch (getInt) {
 			case 0:
 				displayMenuOptions();
 				break;
 			case 1:
-				System.out.println("im being accessed");
+				
 				displayAllBooks();
 
 				break;
 
 			case 2:
 				
-				scan.nextLine();
+				
 				System.out.println("Type the name of the author you're searching for: ");
 				userInput = scan.nextLine();
 				searchAuthor(userInput);
@@ -72,8 +68,13 @@ public class LibraryMain {
 				break;
 
 			case 5:
-				 displayCheckedOut();
-				 // returnBook();
+				System.out.println("Checked Out:");
+				displayCheckedOut();
+				System.out.println("Type the title of the book you want to return: ");
+				userInput = scan.nextLine();
+				returnBook(userInput);
+				saveFile(books);
+				 
 				break;
 
 			case 6:				
@@ -113,8 +114,13 @@ public class LibraryMain {
 	// prints list of all books in library
 	public static void displayAllBooks() {
 		for (Book b : books) {
+			if (b.getDueDate() == null) {
+				System.out.println(b.getTitle() + ", " + b.getAuthor() + ", "
+						+ b.getStatus());
+			} else {
 			System.out.println(b.getTitle() + ", " + b.getAuthor() + ", "
-					+ b.getStatus() + "," + b.getDueDate());
+					+ b.getStatus() + ", Due Back: " + b.getDueDate());
+			}
 		}
 	}
 	
@@ -164,7 +170,7 @@ public class LibraryMain {
 					&& b.getStatus().equalsIgnoreCase("On shelf")){
 				b.setStatus("checked out");
 				b.setDueDate(LocalDate.now().plusWeeks(2));
-				System.out.println("you checked out "+ b.getTitle() + " it's due back:" +b.getDueDate());
+				System.out.println("You checked out "+ b.getTitle() + ", it's due back:" +b.getDueDate());
 			}
 					
 		}
@@ -178,10 +184,6 @@ public class LibraryMain {
 				System.out.println(b.getTitle() + " " + b.getAuthor() + " " + b.getStatus() + " due back: " + b.getDueDate()); 
 			}
 		}
-		
-		//go through library inventory
-		//if status is CheckedOut, then display each books title, author, status, and dueDate.
-		//
 	}
 
 	public static void displayOnShelf() {
@@ -192,14 +194,18 @@ public class LibraryMain {
 						b.getTitle() + ", " + b.getAuthor() + ", " + b.getStatus() );
 			}
 		}
-		
-		//go through library inventory
-		//if status is CheckedOut, then display each books title, author, status, and dueDate.
-		//
 	}
 
 	public static void returnBook(String titleInput) {
-		// changes status of book to On shelf
+		for(Book b: books){
+			if(titleInput.equalsIgnoreCase(b.getTitle())
+					&& b.getStatus().equalsIgnoreCase("Checked Out")){
+				b.setStatus("On Shelf");
+				b.setDueDate(null);
+				System.out.println("You returned "+ b.getTitle());
+			}
+					
+		}
 	}
 
 	
